@@ -6,7 +6,7 @@
 /*   By: csouza-f <caio@42sp.org.br>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 10:15:27 by csouza-f          #+#    #+#             */
-/*   Updated: 2021/12/26 22:42:14 by csouza-f         ###   ########.fr       */
+/*   Updated: 2021/12/28 15:06:51 by csouza-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,6 +186,109 @@ struct s_args *parsing(int argc, char **argv)
 	return (args);
 }
 
+unsigned int sec_to_usec(unsigned int seconds)
+{
+	return (seconds * 1000000);
+}
+
+void	ft_sleep(unsigned int seconds)
+{
+	usleep(sec_to_usec(seconds));
+}
+
+void	*simulation(void *lock)
+{
+	pthread_mutex_lock(lock);
+	ft_sleep(1);
+	printf("comendo...!");
+	printf("dormindo...!");
+	printf("pensando...!\n");
+	pthread_mutex_unlock(lock);
+	return (NULL);
+}
+
+struct s_philosopher	*philo_lstnew(
+	void *(*f)(void*),
+	struct s_args *args,
+	pthread_mutex_t *lock)
+{
+	struct s_philosopher *philosopher;
+	pthread_t thread;
+
+	philosopher = malloc(sizeof(*philosopher));
+	if (!philosopher)
+		return (NULL);
+	philosopher->state = 0;
+	pthread_create(&thread, NULL, f, lock);
+	philosopher->thread = thread;
+	philosopher->args = args;
+	philosopher->next = NULL;
+	philosopher->previous = NULL;
+	return (philosopher);
+}
+
+struct s_philosopher *philo_lstlast(struct s_philosopher *philo)
+{
+	while (philo)
+	{
+		if (!philo->next)
+			return (philo);
+		philo = philo->next;
+	}
+	return (NULL);
+}
+
+void	philo_lstadd_back(struct s_philosopher **philo, struct s_philosopher *new)
+{
+	struct s_philosopher *tmp;
+
+	tmp = philo_lstlast(*philo);
+	if (tmp)
+	{
+		tmp->next = new;
+		tmp->next->previous = tmp;	
+	}
+	else
+		*philo = new;
+}
+
+void	philo_lstfree(struct s_philosopher *philo)
+{
+	struct s_philosopher *tmp;
+
+	while (philo)
+	{
+		tmp = philo;
+		philo = philo->next;
+		free(tmp);
+	}
+}
+
+struct s_philosopher	*philo_llstnew(
+	void *(*f)(void*),
+	struct s_args *args,
+	pthread_mutex_t *lock,
+	size_t amount)
+{
+	struct s_philosopher *philo;
+	struct s_philosopher *new;
+
+	philo = philo_lstnew(f, args, lock);
+	amount--;
+	while (amount)
+	{
+		new = philo_lstnew(f, args, lock);
+		if (!new)
+		{
+			philo_lstfree(philo);
+			return (NULL);
+		}
+		philo_lstadd_back(&philo, new);
+		amount--;
+	}
+	return (philo);
+}
+
 int philosophers(int argc, char **argv)
 {
 	struct s_args *args;
@@ -200,6 +303,19 @@ int philosophers(int argc, char **argv)
 	{
 		error("The arguments are incorrect in some way.");
 		return (EXIT_FAILURE);
+	}
+
+	pthread_mutex_t lock;
+	struct s_philosopher *philo;
+
+	pthread_mutex_init(&lock, NULL);
+	//pthread_mutex_lock(&lock);
+	philo = philo_llstnew(&simulation, args, &lock, args->number_of_philosophers);
+	//pthread_mutex_unlock(&lock);
+	while (philo)
+	{
+		pthread_join(philo->thread, NULL);
+		philo = philo->next;
 	}
 	free(args);
 	return (EXIT_SUCCESS);
