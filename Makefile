@@ -6,7 +6,7 @@
 #    By: csouza-f <caio@42sp.org.br>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/26 10:17:22 by csouza-f          #+#    #+#              #
-#    Updated: 2021/12/27 21:43:55 by csouza-f         ###   ########.fr        #
+#    Updated: 2021/12/28 18:58:54 by csouza-f         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,16 +25,15 @@ SANITIZE = -fsanitize=address
 all: $(NAME)
 
 $(NAME): $(OBJECTS_FILES)
-	gcc $(PTHREAD) $< -o $@
-#	gcc $(SANITIZE) $< -o $@
+	gcc $(PTHREAD) $^ -o $@
 
-$(OBJECTS)/%.o: $(SOURCES_FILES)
+$(OBJECTS)/%.o: $(SOURCES)/%.c
 	gcc $(CCFLAGS) $(PTHREAD) -c -I $(INCLUDE) $< -o $@
 
 clean:
-	rm $(OBJECTS)/*.o
+	rm $(OBJECTS_FILES)
 
 fclean: clean
 	rm $(NAME)
 
-re: clean fclean all
+re: fclean all
