@@ -1,9 +1,13 @@
 name: CI Norminette
 
 on:
-  [push, pull_request]:
+  pull_request:
     branches:
       - main
+    paths:
+      - '**.c'
+      - '**.h'
+  push:
     paths:
       - '**.c'
       - '**.h'
