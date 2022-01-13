@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_lstadd_back.c                                :+:      :+:    :+:   */
+/*   philo_forksfree.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: csouza-f <caio@42sp.org.br>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/28 18:30:55 by csouza-f          #+#    #+#             */
-/*   Updated: 2021/12/28 18:31:06 by csouza-f         ###   ########.fr       */
+/*   Created: 2022/01/03 20:42:10 by csouza-f          #+#    #+#             */
+/*   Updated: 2022/01/03 20:43:05 by csouza-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	philo_lstadd_back(struct s_philosopher **philo, struct s_philosopher *new)
+void	philo_forksfree(struct s_forks *forks)
 {
-	struct s_philosopher *tmp;
+	struct s_forks *tmp;
 
-	tmp = philo_lstlast(*philo);
-	if (tmp)
+	while (forks)
 	{
-		tmp->next = new;
-		tmp->next->previous = tmp;	
+		tmp = forks;
+		forks = forks->next;
+		free(tmp);
 	}
-	else
-		*philo = new;
 }

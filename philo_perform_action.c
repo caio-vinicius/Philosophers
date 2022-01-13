@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_lstlast.c                                    :+:      :+:    :+:   */
+/*   philo_perform_action.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: csouza-f <caio@42sp.org.br>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/28 18:31:27 by csouza-f          #+#    #+#             */
-/*   Updated: 2021/12/28 18:31:39 by csouza-f         ###   ########.fr       */
+/*   Created: 2022/01/05 22:27:35 by csouza-f          #+#    #+#             */
+/*   Updated: 2022/01/09 18:53:17 by csouza-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-struct s_philosopher *philo_lstlast(struct s_philosopher *philo)
+void	philo_perform_action(unsigned int action, struct s_philosopher *philo)
 {
-	while (philo)
-	{
-		if (!philo->next)
-			return (philo);
-		philo = philo->next;
-	}
-	return (NULL);
+	if (philo->state == DEAD)
+		return ;
+	philo->state = action;
+	printf("%6ld %ld %s\n",
+		ft_gettimeofday_relative(philo->table->start),
+		philo->id,
+		philo->table->actions.messages[action]);
 }

@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_lstfree.c                                    :+:      :+:    :+:   */
+/*   philo_lock.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: csouza-f <caio@42sp.org.br>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/28 18:30:17 by csouza-f          #+#    #+#             */
-/*   Updated: 2022/01/05 21:36:47 by csouza-f         ###   ########.fr       */
+/*   Created: 2022/01/11 22:22:30 by csouza-f          #+#    #+#             */
+/*   Updated: 2022/01/11 22:22:38 by csouza-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	philo_lstfree(struct s_philosopher *philo)
+void	philo_lock(struct s_philosopher *philo)
 {
-	struct s_philosopher *tmp;
+	pthread_mutex_lock(philo->lock);
+	philo->locked = 1;
+}
 
-	while (philo)
-	{
-		tmp = philo;
-		philo = philo->next;
-		free(tmp);
-	}
+void	philo_unlock(struct s_philosopher *philo)
+{
+	pthread_mutex_unlock(philo->lock);
+	philo->locked = 0;
 }
