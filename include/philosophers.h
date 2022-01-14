@@ -6,7 +6,7 @@
 /*   By: csouza-f <caio@42sp.org.br>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 10:16:18 by csouza-f          #+#    #+#             */
-/*   Updated: 2022/01/11 23:20:15 by csouza-f         ###   ########.fr       */
+/*   Updated: 2022/01/13 21:27:59 by csouza-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,11 @@ struct s_philosopher {
 	struct s_forks *fork_left;
 	struct s_philosopher *next;
 	struct s_philosopher *previous;
+};
+
+struct s_philosophers {
+	struct s_philosopher **philos;
+	size_t amount;
 };
 
 struct s_table {
