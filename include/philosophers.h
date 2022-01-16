@@ -6,7 +6,7 @@
 /*   By: csouza-f <caio@42sp.org.br>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 10:16:18 by csouza-f          #+#    #+#             */
-/*   Updated: 2022/01/13 21:27:59 by csouza-f         ###   ########.fr       */
+/*   Updated: 2022/01/16 14:32:47 by csouza-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,9 +133,6 @@ miliseconds_t	sec_to_milisec(unsigned int seconds);
 unsigned int	milisec_to_usec(unsigned int miliseconds);
 miliseconds_t	usec_to_milisec(unsigned int usec);
 void		ft_sleep(unsigned int seconds);
-void		ft_msleep(unsigned int miliseconds);
-
-void		philo_lstdelone(struct s_philosopher **philos,
-				struct s_philosopher *philo);
+void		ft_msleep(miliseconds_t ms);
 
 #endif
