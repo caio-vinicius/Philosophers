@@ -6,7 +6,7 @@
 /*   By: csouza-f <caio@42sp.org.br>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/28 18:32:55 by csouza-f          #+#    #+#             */
-/*   Updated: 2021/12/28 18:33:25 by csouza-f         ###   ########.fr       */
+/*   Updated: 2022/01/16 16:36:50 by csouza-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,8 +180,8 @@ struct s_args *parsing(int argc, char **argv)
 	args->time_to_die = ft_simple_atoi(argv[1]);
 	args->time_to_eat = ft_simple_atoi(argv[2]);
 	args->time_to_sleep = ft_simple_atoi(argv[3]);
-	args->number_of_times_each_philosopher_must_eat = 0;
+	args->nbr_of_times_each_philo_must_eat = 0;
 	if (argv[4])
-		args->number_of_times_each_philosopher_must_eat = ft_simple_atoi(argv[4]);
+		args->nbr_of_times_each_philo_must_eat = ft_simple_atoi(argv[4]);
 	return (args);
 }

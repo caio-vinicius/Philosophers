@@ -6,7 +6,7 @@
 /*   By: csouza-f <caio@42sp.org.br>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 10:16:18 by csouza-f          #+#    #+#             */
-/*   Updated: 2022/01/16 14:32:47 by csouza-f         ###   ########.fr       */
+/*   Updated: 2022/01/16 20:35:16 by csouza-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ struct s_args {
 	miliseconds_t time_to_die;
 	miliseconds_t time_to_eat;
 	miliseconds_t time_to_sleep;
-	unsigned int number_of_times_each_philosopher_must_eat;
+	unsigned int nbr_of_times_each_philo_must_eat;
 };
 
 struct s_actions {
