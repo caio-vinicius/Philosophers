@@ -6,7 +6,7 @@
 #    By: csouza-f <caio@42sp.org.br>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/26 10:17:22 by csouza-f          #+#    #+#              #
-#    Updated: 2021/12/28 18:58:54 by csouza-f         ###   ########.fr        #
+#    Updated: 2022/01/16 11:22:43 by csouza-f         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,9 +31,9 @@ $(OBJECTS)/%.o: $(SOURCES)/%.c
 	gcc $(CCFLAGS) $(PTHREAD) -c -I $(INCLUDE) $< -o $@
 
 clean:
-	rm $(OBJECTS_FILES)
+	rm -f $(OBJECTS_FILES)
 
 fclean: clean
-	rm $(NAME)
+	rm -f $(NAME)
 
 re: fclean all
