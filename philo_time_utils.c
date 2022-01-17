@@ -6,7 +6,7 @@
 /*   By: csouza-f <caio@42sp.org.br>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 11:00:06 by csouza-f          #+#    #+#             */
-/*   Updated: 2022/01/02 21:16:08 by csouza-f         ###   ########.fr       */
+/*   Updated: 2022/01/16 10:38:03 by csouza-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ void	ft_sleep(unsigned int seconds)
 	usleep(sec_to_usec(seconds));
 }
 
-void	ft_msleep(unsigned int miliseconds)
+void	ft_msleep(miliseconds_t ms)
 {
-	usleep(milisec_to_usec(miliseconds));
+	usleep(milisec_to_usec(ms));
 }
 
 miliseconds_t	ft_gettimeofday(void)
