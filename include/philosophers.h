@@ -6,7 +6,7 @@
 /*   By: csouza-f <caio@42sp.org.br>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 10:16:18 by csouza-f          #+#    #+#             */
-/*   Updated: 2022/01/16 20:35:16 by csouza-f         ###   ########.fr       */
+/*   Updated: 2022/01/16 22:25:29 by csouza-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,6 @@ struct s_args {
 	unsigned int nbr_of_times_each_philo_must_eat;
 };
 
-struct s_actions {
-	const char *messages[AMOUNT_ACTIONS];
-};
-
 struct s_forks {
 	pthread_mutex_t *lock;
 	struct s_forks *next;
@@ -72,8 +68,7 @@ struct s_table {
 	miliseconds_t start;
 	unsigned int state;
    	pthread_t thread;
-	pthread_mutex_t *lock;
-	struct s_actions actions;
+	const char *actions[AMOUNT_ACTIONS];
 };
 
 // PHILO LIST
@@ -88,7 +83,7 @@ void			philo_lstfree(struct s_philosopher *philo);
 
 // PHILO FORKS
 
-void	philo_forksfree(struct s_forks *forks);
+void	philo_forksfree(struct s_forks *forks, unsigned int amount);
 
 // PHILO PARSING
 

@@ -6,7 +6,7 @@
 /*   By: csouza-f <caio@42sp.org.br>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 17:11:12 by csouza-f          #+#    #+#             */
-/*   Updated: 2022/01/16 20:56:20 by csouza-f         ###   ########.fr       */
+/*   Updated: 2022/01/16 22:54:33 by csouza-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ static int	philo_eat(struct s_philosopher *philo)
 	philo_eat_forks_hold(philo);
 	if (!philo_perform_action(EATING, philo))
 		return (0);
+	philo->nbr_of_times_eaten = philo->nbr_of_times_eaten + 1;
 	ft_msleep(philo->table->args->time_to_eat);
 	philo->last_meal = ft_gettimeofday();
-	philo->nbr_of_times_eaten = philo->nbr_of_times_eaten + 1;
 	philo_eat_forks_release(philo);
 	return (1);
 }
@@ -71,5 +71,6 @@ void	*philo_simulation(void *arg)
 		if (!philo_think(philo))
 			break ;
 	}
+	pthread_detach(philo->thread);
 	return (NULL);
 }

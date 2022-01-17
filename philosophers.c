@@ -6,7 +6,7 @@
 /*   By: csouza-f <caio@42sp.org.br>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 10:15:27 by csouza-f          #+#    #+#             */
-/*   Updated: 2022/01/12 21:48:05 by csouza-f         ###   ########.fr       */
+/*   Updated: 2022/01/16 23:05:50 by csouza-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,7 @@ int philosophers(int argc, char **argv)
 		return (EXIT_FAILURE);
 	}
 	table = philo_tablenew(args);
-	//philo_lstdelone(&table->philo, table->philo);
-	//pthread_mutex_unlock(table->lock);
-	//ft_msleep(5);
 	philo_tablenew_manager(table);
-	philo_tablenew_controller(table);
 	philo = table->philo;
 	while (philo)
 	{
@@ -42,7 +38,7 @@ int philosophers(int argc, char **argv)
 		philo = philo->next;
 	}
 	pthread_join(table->thread, NULL);
-	philo_tablefree(table);		
+	philo_tablefree(table);
 	return (EXIT_SUCCESS);
 }
 
