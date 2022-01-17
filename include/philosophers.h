@@ -30,9 +30,8 @@
 # define THINKING 3
 # define DEAD 4
 
-# define WAITING 5
-# define NOT_STARTED 6
-# define RUNNING 7
+# define NOT_RUNNING 5
+# define RUNNING 6
 
 typedef size_t miliseconds_t; 
 
@@ -50,7 +49,6 @@ struct s_actions {
 
 struct s_forks {
 	pthread_mutex_t *lock;
-	unsigned int locked;
 	struct s_forks *next;
 	struct s_forks *previous;
 };
@@ -58,26 +56,21 @@ struct s_forks {
 struct s_philosopher {
 	size_t id;
 	unsigned int state;
-	miliseconds_t start;
 	miliseconds_t last_meal;
+	miliseconds_t delay;
+	unsigned int nbr_of_times_eaten;
    	pthread_t thread;
-	pthread_mutex_t *lock;
-	unsigned int locked;
 	struct s_table *table;
 	struct s_forks *fork_left;
 	struct s_philosopher *next;
 	struct s_philosopher *previous;
 };
 
-struct s_philosophers {
-	struct s_philosopher **philos;
-	size_t amount;
-};
-
 struct s_table {
 	struct s_philosopher *philo;
 	struct s_args *args;
 	miliseconds_t start;
+	unsigned int state;
    	pthread_t thread;
 	pthread_mutex_t *lock;
 	struct s_actions actions;
@@ -92,12 +85,6 @@ struct s_philosopher	*philo_llstnew(
 	size_t amount);
 struct s_forks		*philo_lforksnew(size_t amount);
 void			philo_lstfree(struct s_philosopher *philo);
-//void	philo_lstadd_back(struct s_philosopher **philo, struct s_philosopher *new);
-//struct s_philosopher *philo_lstlast(struct s_philosopher *philo);
-//struct s_philosopher	*philo_lstnew(
-//	void *(*f)(void*),
-//	struct s_table *table,
-//	unsigned int id);
 
 // PHILO FORKS
 
@@ -116,12 +103,7 @@ struct s_table	*philo_tablenew(struct s_args *args);
 void		philo_tablefree(struct s_table *table);
 void		philo_tablenew_manager(struct s_table *table);
 
-void		philo_tablenew_controller(struct s_table *table);
-
-void		philo_lock(struct s_philosopher *philo);
-void		philo_unlock(struct s_philosopher *philo);
-
-void	philo_perform_action(unsigned int action, struct s_philosopher *philo);
+int	philo_perform_action(unsigned int action, struct s_philosopher *philo);
 
 // PHILO TIME
 

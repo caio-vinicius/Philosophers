@@ -6,60 +6,83 @@
 /*   By: csouza-f <caio@42sp.org.br>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 21:20:10 by csouza-f          #+#    #+#             */
-/*   Updated: 2022/01/12 21:33:02 by csouza-f         ###   ########.fr       */
+/*   Updated: 2022/01/16 20:58:35 by csouza-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	all_dead(struct s_philosopher *philo)
+static int	didnt_eat_on_time(struct s_philosopher *philo)
+{
+	miliseconds_t time_to_die;
+
+	time_to_die = philo->table->args->time_to_die;	
+	
+	if ((ft_gettimeofday() - philo->last_meal) >= time_to_die)
+		if (philo->state != EATING)
+			return (1);
+	return (0);
+}
+
+static int	ate_more_than_enough(struct s_table *table)
+{
+	struct s_philosopher *philo;
+	size_t i;
+	size_t j;
+	
+	if (!table->args->nbr_of_times_each_philo_must_eat)
+		return (0);
+	philo = table->philo;
+	i = 0;
+	j = 0;
+	while (philo)
+	{
+		if (philo->nbr_of_times_eaten >= \
+			table->args->nbr_of_times_each_philo_must_eat)
+			i++;
+		j++;
+		philo = philo->next;
+	}
+	if (i == j)
+		return (1);
+	return (0);
+}
+
+static void	philo_forks_release_all(struct s_philosopher *philo)
 {
 	while (philo)
 	{
-		if (philo->state != DEAD)
-			return (0);
+		pthread_mutex_unlock(philo->fork_left->lock);
 		philo = philo->next;
 	}
-	return (1);
 }
 
 void	*manager(void *arg)
 {
 	struct s_philosopher *philo;
 	struct s_table *table;
-	miliseconds_t current;
-	miliseconds_t start;
-	
-	printf("[MANAGER] Starting\n");
+
+	//printf("[MANAGER] Starting\n");
 	table = (struct s_table*)arg;
 	philo = table->philo;
-	while (!all_dead(table->philo))
+	while (1)
 	{
-		ft_msleep(1);
-		//printf("===================== verifying philo %ld\n", philo->id);
-		current = ft_gettimeofday();
-		//printf("%ld | %ld\n", current, philo->last_meal);
-		//printf("%ld | %ld\n", tv.tv_sec, sec_to_usec(tv.tv_sec));
-		start = philo->start;
-		if (philo->last_meal)
-			start = philo->last_meal;
-		if ((current - start) >= philo->table->args->time_to_die && philo->state != EATING)
+		// maybe?
+		// do not let processor burn
+		usleep(10);
+		if (didnt_eat_on_time(philo) || ate_more_than_enough(table))
 		{
-			if (philo->state != DEAD)
-			{
-				//printf("state: %d\n", philo->state);
-				//printf("start: %ld last_meal: %ld\n", philo->start, philo->last_meal);
-				//printf("%ld - %ld = %ld\n", current, start, current - start);
-				philo_perform_action(DEAD, philo);
-				philo_lstdelone(&table->philo, philo);
-				pthread_detach(philo->thread);
-			}
-		}
+			philo_perform_action(DEAD, philo);
+			philo->table->state = NOT_RUNNING;
+			philo_forks_release_all(table->philo);
+			break ;
+		} 
 		if (philo->next)
 			philo = philo->next;
 		else
 			philo = table->philo;
 	}
+	//printf("[MANAGER] Finished\n");
 	return (NULL);
 }
 

@@ -6,7 +6,7 @@
 /*   By: csouza-f <caio@42sp.org.br>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 20:16:36 by csouza-f          #+#    #+#             */
-/*   Updated: 2022/01/09 12:10:19 by csouza-f         ###   ########.fr       */
+/*   Updated: 2022/01/16 13:57:15 by csouza-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ static struct s_forks	*philo_forksnew(void)
 	lock = malloc(sizeof(*lock));
 	pthread_mutex_init(lock, NULL);
 	forks->lock = lock;
-	forks->locked = 0;
 	forks->next = NULL;
 	forks->previous = NULL;
 	return (forks);

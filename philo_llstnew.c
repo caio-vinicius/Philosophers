@@ -6,7 +6,7 @@
 /*   By: csouza-f <caio@42sp.org.br>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/28 18:29:35 by csouza-f          #+#    #+#             */
-/*   Updated: 2022/01/12 21:26:44 by csouza-f         ###   ########.fr       */
+/*   Updated: 2022/01/16 16:49:56 by csouza-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,36 +47,24 @@ static struct s_philosopher	*philo_lstnew(
 {
 	struct s_philosopher *philosopher;
 	pthread_t thread;
-	pthread_mutex_t *lock;
-	//miliseconds_t *last_meal;
-	//miliseconds_t *start;
 
 	philosopher = malloc(sizeof(*philosopher));
 	if (!philosopher)
 		return (NULL);
-	lock = malloc(sizeof(*lock));
-	pthread_mutex_init(lock, NULL);
-	pthread_mutex_lock(lock);
-	// replace with philo_lock() after;
-	philosopher->lock = lock;
-	philosopher->locked = 1;
 	philosopher->id = id;
-	philosopher->state = NOT_STARTED;
-	//start = malloc(sizeof(*last_meal));
-	//*start = 0;
-	//philosopher->start = start;
-	philosopher->start = 0;
-	//last_meal = malloc(sizeof(*last_meal));
-	//*last_meal = 0;
-	//philosopher->last_meal = last_meal;
-	philosopher->last_meal = 0;
+	if (id % 2)
+		philosopher->delay = 5;
+	else
+		philosopher->delay = 0;
+	philosopher->state = NOT_RUNNING;
+	philosopher->nbr_of_times_eaten = 0;
 	philosopher->table = table;
 	philosopher->fork_left = fork_left;
 	philosopher->next = NULL;
 	philosopher->previous = NULL;
-	//thread = malloc(sizeof(*thread));
 	pthread_create(&thread, NULL, f, philosopher);
 	philosopher->thread = thread;
+	philosopher->last_meal = ft_gettimeofday();
 	return (philosopher);
 }
 
