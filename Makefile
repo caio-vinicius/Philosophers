@@ -6,13 +6,13 @@
 #    By: csouza-f <caio@42sp.org.br>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/26 10:17:22 by csouza-f          #+#    #+#              #
-#    Updated: 2022/01/16 11:22:43 by csouza-f         ###   ########.fr        #
+#    Updated: 2022/01/17 22:26:23 by csouza-f         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 
-SOURCES = ./
+SOURCES = ./philo
 SOURCES_FILES = $(wildcard $(SOURCES)/*.c)
 OBJECTS = ./objects
 OBJECTS_FILES = $(patsubst $(SOURCES)/%.c,$(OBJECTS)/%.o,$(SOURCES_FILES))
@@ -25,7 +25,7 @@ SANITIZE = -fsanitize=address
 all: $(NAME)
 
 $(NAME): $(OBJECTS_FILES)
-	gcc $(PTHREAD) $^ -o $@
+	gcc $(PTHREAD) $^ -o $(SOURCES)/$@
 
 $(OBJECTS)/%.o: $(SOURCES)/%.c
 	gcc $(CCFLAGS) $(PTHREAD) -c -I $(INCLUDE) $< -o $@

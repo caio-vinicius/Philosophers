@@ -6,7 +6,7 @@
 /*   By: csouza-f <caio@42sp.org.br>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 21:20:10 by csouza-f          #+#    #+#             */
-/*   Updated: 2022/01/16 23:06:41 by csouza-f         ###   ########.fr       */
+/*   Updated: 2022/01/17 22:17:34 by csouza-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	*run_didnt_eat_on_time(void *arg)
 		{
 			philo_perform_action(DEAD, philo);
 			table->state = NOT_RUNNING;
-			//philo_forks_release_all(table->philo);
+			philo_forks_release_all(table->philo);
 			break ;
 		} 
 		if (philo->next)
@@ -94,12 +94,11 @@ void	*run_ate_more_than_enough(void *arg)
 		if (ate_more_than_enough(table))
 		{
 			table->state = NOT_RUNNING;
-			//philo_forks_release_all(table->philo);
+			philo_forks_release_all(table->philo);
 			break ;
 		} 
 	}
 	return (NULL);
-
 }
 
 void	*manager(void *arg)

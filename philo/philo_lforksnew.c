@@ -6,7 +6,7 @@
 /*   By: csouza-f <caio@42sp.org.br>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 20:16:36 by csouza-f          #+#    #+#             */
-/*   Updated: 2022/01/16 22:19:06 by csouza-f         ###   ########.fr       */
+/*   Updated: 2022/01/17 22:17:12 by csouza-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,9 @@ struct s_forks	*philo_lforksnew(size_t amount)
 		}
 		philo_forksadd_back(&forks, new);
 		i++;
-		if (i == amount)
-		{
-			new->next = forks;
-			forks->previous = new;
-		}
 	}
+	new = philo_forkslast(forks);
+	new->next = forks;
+	forks->previous = new;
 	return (forks);
 }
