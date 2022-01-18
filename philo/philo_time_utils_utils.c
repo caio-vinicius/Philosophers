@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_tablefree.c                                  :+:      :+:    :+:   */
+/*   philo_time_utils_utils.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: csouza-f <caio@42sp.org.br>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/30 11:58:21 by csouza-f          #+#    #+#             */
-/*   Updated: 2022/01/17 23:15:42 by csouza-f         ###   ########.fr       */
+/*   Created: 2022/01/17 23:22:15 by csouza-f          #+#    #+#             */
+/*   Updated: 2022/01/17 23:22:22 by csouza-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	philo_tablefree(struct s_table *table)
+size_t	sec_to_usec(size_t seconds)
 {
-	if (table->philo->fork_left)
-		philo_forksfree(table->philo->fork_left,
-			table->args->number_of_philosophers);
-	if (table->philo)
-		philo_lstfree(table->philo);
-	if (table->args)
-		free(table->args);
-	free(table);
+	return (seconds * 1000000);
+}
+
+miliseconds_t	sec_to_milisec(unsigned int seconds)
+{
+	return (seconds * 1000);
+}
+
+unsigned int	milisec_to_usec(unsigned int miliseconds)
+{
+	return (miliseconds * 1000);
+}
+
+miliseconds_t	usec_to_milisec(unsigned int usec)
+{
+	return (usec * 0.001);
 }

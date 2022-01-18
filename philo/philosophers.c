@@ -6,27 +6,34 @@
 /*   By: csouza-f <caio@42sp.org.br>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 10:15:27 by csouza-f          #+#    #+#             */
-/*   Updated: 2022/01/16 23:05:50 by csouza-f         ###   ########.fr       */
+/*   Updated: 2022/01/17 23:39:39 by csouza-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int philosophers(int argc, char **argv)
+struct s_table	*philo_tablenew(struct s_args *args);
+void			philo_tablefree(struct s_table *table);
+void			philo_tablenew_manager(struct s_table *table);
+
+struct s_args	*philo_parsing(int argc, char **argv);
+void			usage(void);
+
+static int	philosophers(int argc, char **argv)
 {
-	struct s_args *args;
-	struct s_table *table;
-	struct s_philosopher *philo;
-	
+	struct s_philosopher	*philo;
+	struct s_args			*args;
+	struct s_table			*table;
+
 	if (!*++argv)
 	{
 		usage();
 		return (EXIT_FAILURE);
 	}
-	args = parsing(argc, argv);
+	args = philo_parsing(argc, argv);
 	if (!args)
 	{
-		error("The arguments are incorrect in some way.");
+		printf("Error: %s", "The arguments are incorrect in some way.");
 		return (EXIT_FAILURE);
 	}
 	table = philo_tablenew(args);
@@ -42,7 +49,7 @@ int philosophers(int argc, char **argv)
 	return (EXIT_SUCCESS);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	if (!philosophers(argc, argv))
 		return (EXIT_SUCCESS);

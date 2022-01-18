@@ -6,31 +6,16 @@
 /*   By: csouza-f <caio@42sp.org.br>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 11:00:06 by csouza-f          #+#    #+#             */
-/*   Updated: 2022/01/17 20:56:34 by csouza-f         ###   ########.fr       */
+/*   Updated: 2022/01/17 23:24:21 by csouza-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-size_t sec_to_usec(size_t seconds)
-{
-	return (seconds * 1000000);
-}
-
-miliseconds_t sec_to_milisec(unsigned int seconds)
-{
-	return (seconds * 1000);
-}
-
-unsigned int milisec_to_usec(unsigned int miliseconds)
-{
-	return (miliseconds * 1000);
-}
-
-miliseconds_t usec_to_milisec(unsigned int usec)
-{
-	return (usec * 0.001);
-}
+miliseconds_t	sec_to_milisec(unsigned int seconds);
+unsigned int	milisec_to_usec(unsigned int miliseconds);
+miliseconds_t	usec_to_milisec(unsigned int usec);
+size_t			sec_to_usec(size_t seconds);
 
 void	ft_sleep(unsigned int seconds)
 {
@@ -44,10 +29,11 @@ void	ft_msleep(miliseconds_t ms)
 
 miliseconds_t	ft_gettimeofday(void)
 {
-	struct timeval current_time;
+	struct timeval	current_time;
 
 	gettimeofday(&current_time, NULL);
-	return (sec_to_milisec(current_time.tv_sec) + usec_to_milisec(current_time.tv_usec));
+	return (sec_to_milisec(current_time.tv_sec) + \
+		usec_to_milisec(current_time.tv_usec));
 }
 
 miliseconds_t	ft_gettimeofday_relative(miliseconds_t start)

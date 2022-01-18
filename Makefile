@@ -6,7 +6,7 @@
 #    By: csouza-f <caio@42sp.org.br>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/26 10:17:22 by csouza-f          #+#    #+#              #
-#    Updated: 2022/01/17 22:26:23 by csouza-f         ###   ########.fr        #
+#    Updated: 2022/01/17 23:38:06 by csouza-f         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,6 @@ clean:
 	rm -f $(OBJECTS_FILES)
 
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(SOURCES)/$(NAME)
 
 re: fclean all

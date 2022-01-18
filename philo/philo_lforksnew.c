@@ -6,13 +6,13 @@
 /*   By: csouza-f <caio@42sp.org.br>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 20:16:36 by csouza-f          #+#    #+#             */
-/*   Updated: 2022/01/17 22:17:12 by csouza-f         ###   ########.fr       */
+/*   Updated: 2022/01/17 23:49:23 by csouza-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-static struct s_forks *philo_forkslast(struct s_forks *forks)
+static struct s_forks	*philo_forkslast(struct s_forks *forks)
 {
 	while (forks)
 	{
@@ -27,7 +27,7 @@ static void	philo_forksadd_back(
 	struct s_forks **forks,
 	struct s_forks *new)
 {
-	struct s_forks *tmp;
+	struct s_forks	*tmp;
 
 	tmp = philo_forkslast(*forks);
 	if (tmp)
@@ -41,8 +41,8 @@ static void	philo_forksadd_back(
 
 static struct s_forks	*philo_forksnew(void)
 {
-	struct s_forks *forks;
-	pthread_mutex_t *lock;
+	struct s_forks	*forks;
+	pthread_mutex_t	*lock;
 
 	forks = malloc(sizeof(*forks));
 	if (!forks)
@@ -57,10 +57,10 @@ static struct s_forks	*philo_forksnew(void)
 
 struct s_forks	*philo_lforksnew(size_t amount)
 {
-	struct s_forks *forks;
-	struct s_forks *new;
-	size_t i;
-	
+	struct s_forks	*forks;
+	struct s_forks	*new;
+	size_t			i;
+
 	if (amount)
 	{
 		forks = philo_forksnew();

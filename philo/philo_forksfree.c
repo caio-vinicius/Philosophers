@@ -6,7 +6,7 @@
 /*   By: csouza-f <caio@42sp.org.br>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 20:42:10 by csouza-f          #+#    #+#             */
-/*   Updated: 2022/01/17 21:01:35 by csouza-f         ###   ########.fr       */
+/*   Updated: 2022/01/17 23:48:08 by csouza-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	philo_forksfree(struct s_forks *forks, unsigned int amount)
 {
-	struct s_forks *tmp;
+	struct s_forks	*tmp;
 
 	while (amount)
 	{

@@ -6,7 +6,7 @@
 /*   By: csouza-f <caio@42sp.org.br>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 10:16:18 by csouza-f          #+#    #+#             */
-/*   Updated: 2022/01/16 22:25:29 by csouza-f         ###   ########.fr       */
+/*   Updated: 2022/01/17 23:37:12 by csouza-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@
 #include <pthread.h>
 #include <sys/time.h>
 
-// PHILOSOPHER POSSIBLE STATE
-
+# define TOTAL_AMOUNT_ARGUMENTS 5
 # define AMOUNT_ACTIONS 5
 
 # define FORK 0
@@ -71,45 +70,13 @@ struct s_table {
 	const char *actions[AMOUNT_ACTIONS];
 };
 
-// PHILO LIST
-
-struct s_philosopher	*philo_llstnew(
-	void *(*f)(void*),
-	struct s_forks *forks,
-	struct s_table *table,
-	size_t amount);
-struct s_forks		*philo_lforksnew(size_t amount);
-void			philo_lstfree(struct s_philosopher *philo);
-
-// PHILO FORKS
+void	philo_lstfree(struct s_philosopher *philo);
 
 void	philo_forksfree(struct s_forks *forks, unsigned int amount);
 
-// PHILO PARSING
-
-struct s_args 	*parsing(int argc, char **argv);
-void		usage(void);
-void		error(char *str);
-
-// PHILO ?
-
-void		*philo_simulation(void *arg);
-struct s_table	*philo_tablenew(struct s_args *args);
-void		philo_tablefree(struct s_table *table);
-void		philo_tablenew_manager(struct s_table *table);
-
 int	philo_perform_action(unsigned int action, struct s_philosopher *philo);
 
-// PHILO TIME
-
-
-miliseconds_t	ft_gettimeofday_relative(miliseconds_t start);
 miliseconds_t	ft_gettimeofday(void);
-size_t		sec_to_usec(size_t seconds);
-miliseconds_t	sec_to_milisec(unsigned int seconds);
-unsigned int	milisec_to_usec(unsigned int miliseconds);
-miliseconds_t	usec_to_milisec(unsigned int usec);
-void		ft_sleep(unsigned int seconds);
 void		ft_msleep(miliseconds_t ms);
 
 #endif

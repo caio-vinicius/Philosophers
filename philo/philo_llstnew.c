@@ -6,13 +6,13 @@
 /*   By: csouza-f <caio@42sp.org.br>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/28 18:29:35 by csouza-f          #+#    #+#             */
-/*   Updated: 2022/01/16 22:25:25 by csouza-f         ###   ########.fr       */
+/*   Updated: 2022/01/17 23:19:14 by csouza-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-static struct s_philosopher *philo_lstlast(struct s_philosopher *philo)
+static struct s_philosopher	*philo_lstlast(struct s_philosopher *philo)
 {
 	while (philo)
 	{
@@ -27,13 +27,13 @@ static void	philo_lstadd_back(
 	struct s_philosopher **philo,
 	struct s_philosopher *new)
 {
-	struct s_philosopher *tmp;
+	struct s_philosopher	*tmp;
 
 	tmp = philo_lstlast(*philo);
 	if (tmp)
 	{
 		tmp->next = new;
-		tmp->next->previous = tmp;	
+		tmp->next->previous = tmp;
 	}
 	else
 		*philo = new;
@@ -45,8 +45,8 @@ static struct s_philosopher	*philo_lstnew(
 	struct s_table *table,
 	unsigned int id)
 {
-	struct s_philosopher *philosopher;
-	pthread_t thread;
+	struct s_philosopher	*philosopher;
+	pthread_t				thread;
 
 	philosopher = malloc(sizeof(*philosopher));
 	if (!philosopher)
@@ -83,7 +83,7 @@ struct s_forks	*philo_forks_get(struct s_forks *forks, int position)
 			position--;
 		}
 	}
-	return (forks);	
+	return (forks);
 }
 
 struct s_philosopher	*philo_llstnew(
@@ -92,10 +92,10 @@ struct s_philosopher	*philo_llstnew(
 	struct s_table *table,
 	size_t amount)
 {
-	struct s_philosopher *philo;
-	struct s_philosopher *new;
-	struct s_forks *fork_left;
-	size_t i;
+	struct s_philosopher	*philo;
+	struct s_philosopher	*new;
+	struct s_forks			*fork_left;
+	size_t					i;
 
 	fork_left = philo_forks_get(forks, (0 - 1));
 	philo = philo_lstnew(f, fork_left, table, 0);
