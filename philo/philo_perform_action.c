@@ -6,13 +6,13 @@
 /*   By: csouza-f <caio@42sp.org.br>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 22:27:35 by csouza-f          #+#    #+#             */
-/*   Updated: 2022/01/17 23:34:02 by csouza-f         ###   ########.fr       */
+/*   Updated: 2022/01/18 20:33:08 by csouza-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-miliseconds_t	ft_gettimeofday_relative(miliseconds_t start);
+t_miliseconds	ft_gettimeofday_relative(t_miliseconds start);
 
 int	philo_perform_action(unsigned int action, struct s_philosopher *philo)
 {

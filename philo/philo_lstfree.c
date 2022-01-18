@@ -6,7 +6,7 @@
 /*   By: csouza-f <caio@42sp.org.br>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/28 18:30:17 by csouza-f          #+#    #+#             */
-/*   Updated: 2022/01/05 21:36:47 by csouza-f         ###   ########.fr       */
+/*   Updated: 2022/01/18 20:25:08 by csouza-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	philo_lstfree(struct s_philosopher *philo)
 {
-	struct s_philosopher *tmp;
+	struct s_philosopher	*tmp;
 
 	while (philo)
 	{

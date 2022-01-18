@@ -6,11 +6,14 @@
 /*   By: csouza-f <caio@42sp.org.br>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 21:20:10 by csouza-f          #+#    #+#             */
-/*   Updated: 2022/01/17 23:58:02 by csouza-f         ###   ########.fr       */
+/*   Updated: 2022/01/18 20:28:57 by csouza-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+int	didnt_eat_on_time(struct s_philosopher *philo);
+int	ate_more_than_enough(struct s_table *table);
 
 static void	philo_forks_release_all(struct s_philosopher *philo)
 {
@@ -20,19 +23,6 @@ static void	philo_forks_release_all(struct s_philosopher *philo)
 		philo = philo->next;
 	}
 }
-
-static int	didnt_eat_on_time(struct s_philosopher *philo)
-{
-	miliseconds_t	time_to_die;
-
-	time_to_die = philo->table->args->time_to_die;
-	if ((ft_gettimeofday() - philo->last_meal) >= time_to_die)
-		if (philo->state != EATING)
-			return (1);
-	return (0);
-}
-
-#define LOOP_DELAY_USEC 5
 
 void	*run_didnt_eat_on_time(void *arg)
 {
@@ -57,28 +47,6 @@ void	*run_didnt_eat_on_time(void *arg)
 			philo = table->philo;
 	}
 	return (NULL);
-}
-
-static int	ate_more_than_enough(struct s_table *table)
-{
-	struct s_philosopher	*philo;
-	size_t					i;
-	size_t					j;
-
-	philo = table->philo;
-	i = 0;
-	j = 0;
-	while (philo)
-	{
-		if (philo->nbr_of_times_eaten >= \
-			table->args->nbr_of_times_each_philo_must_eat)
-			i++;
-		j++;
-		philo = philo->next;
-	}
-	if (i == j)
-		return (1);
-	return (0);
 }
 
 void	*run_ate_more_than_enough(void *arg)

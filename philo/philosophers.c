@@ -6,7 +6,7 @@
 /*   By: csouza-f <caio@42sp.org.br>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 10:15:27 by csouza-f          #+#    #+#             */
-/*   Updated: 2022/01/17 23:39:39 by csouza-f         ###   ########.fr       */
+/*   Updated: 2022/01/18 20:19:12 by csouza-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,10 @@ static int	philosophers(int argc, char **argv)
 	struct s_args			*args;
 	struct s_table			*table;
 
-	if (!*++argv)
-	{
-		usage();
-		return (EXIT_FAILURE);
-	}
 	args = philo_parsing(argc, argv);
 	if (!args)
 	{
-		printf("Error: %s", "The arguments are incorrect in some way.");
+		usage();
 		return (EXIT_FAILURE);
 	}
 	table = philo_tablenew(args);

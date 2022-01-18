@@ -6,16 +6,16 @@
 /*   By: csouza-f <caio@42sp.org.br>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/28 18:32:55 by csouza-f          #+#    #+#             */
-/*   Updated: 2022/01/17 22:59:51 by csouza-f         ###   ########.fr       */
+/*   Updated: 2022/01/18 20:24:53 by csouza-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	ft_simple_atoi(char *str);
-int	ft_strcmp(char *str1, char *str2);
-int	ft_isdigit(int c);
 char	*ft_simple_itoa(unsigned int number);
+int		ft_simple_atoi(char *str);
+int		ft_strcmp(char *str1, char *str2);
+int		ft_isdigit(int c);
 
 void	usage(void)
 {
@@ -95,6 +95,8 @@ struct s_args	*philo_parsing(int argc, char **argv)
 {
 	struct s_args	*args;
 
+	if (!*++argv)
+		return (NULL);
 	if (!are_enough(--argc))
 		return (NULL);
 	if (!are_non_negative_numbers(argv))
