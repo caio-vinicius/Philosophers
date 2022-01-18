@@ -6,7 +6,7 @@
 /*   By: csouza-f <caio@42sp.org.br>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 11:00:06 by csouza-f          #+#    #+#             */
-/*   Updated: 2022/01/16 10:38:03 by csouza-f         ###   ########.fr       */
+/*   Updated: 2022/01/17 20:56:34 by csouza-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ unsigned int milisec_to_usec(unsigned int miliseconds)
 
 miliseconds_t usec_to_milisec(unsigned int usec)
 {
-	return (usec / 1000);
+	return (usec * 0.001);
 }
 
 void	ft_sleep(unsigned int seconds)
