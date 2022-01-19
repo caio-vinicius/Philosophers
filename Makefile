@@ -6,7 +6,7 @@
 #    By: csouza-f <caio@42sp.org.br>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/26 10:17:22 by csouza-f          #+#    #+#              #
-#    Updated: 2022/01/19 00:23:09 by csouza-f         ###   ########.fr        #
+#    Updated: 2022/01/19 00:24:31 by csouza-f         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ $(NAME): $(OBJECTS_FILES)
 	gcc $(PTHREAD) $^ -o $(SOURCES)/$@
 
 $(OBJECTS)/%.o: $(SOURCES)/%.c
-	gcc $(CCFLAGS) $(PTHREAD) -c -I $(INCLUDE) $< -o $@
+	gcc $(CCFLAGS) -c -I $(INCLUDE) $< -o $@
 
 clean:
 	rm -f $(OBJECTS_FILES)
