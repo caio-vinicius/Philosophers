@@ -6,7 +6,7 @@
 /*   By: csouza-f <caio@42sp.org.br>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 17:11:12 by csouza-f          #+#    #+#             */
-/*   Updated: 2022/01/17 23:50:37 by csouza-f         ###   ########.fr       */
+/*   Updated: 2022/01/18 22:07:37 by csouza-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,5 @@ void	*philo_simulation(void *arg)
 		if (!philo_think(philo))
 			break ;
 	}
-	pthread_detach(philo->thread);
 	return (NULL);
 }

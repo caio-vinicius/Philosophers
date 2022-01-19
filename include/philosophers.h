@@ -6,7 +6,7 @@
 /*   By: csouza-f <caio@42sp.org.br>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 10:16:18 by csouza-f          #+#    #+#             */
-/*   Updated: 2022/01/18 20:55:42 by csouza-f         ###   ########.fr       */
+/*   Updated: 2022/01/18 22:16:57 by csouza-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <pthread.h>
 # include <sys/time.h>
 
+# define REPLACE_DELAY_MILISEC 2
 # define LOOP_DELAY_USEC 5
 # define TOTAL_AMOUNT_ARGUMENTS 5
 # define AMOUNT_ACTIONS 5
