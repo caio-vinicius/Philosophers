@@ -6,7 +6,7 @@
 /*   By: csouza-f <caio@42sp.org.br>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/28 18:29:35 by csouza-f          #+#    #+#             */
-/*   Updated: 2022/01/17 23:19:14 by csouza-f         ###   ########.fr       */
+/*   Updated: 2022/01/18 23:13:49 by csouza-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,11 +98,11 @@ struct s_philosopher	*philo_llstnew(
 	size_t					i;
 
 	fork_left = philo_forks_get(forks, (0 - 1));
-	philo = philo_lstnew(f, fork_left, table, 0);
-	i = 1;
-	while (i < amount)
+	philo = philo_lstnew(f, fork_left, table, 1);
+	i = 2;
+	while (i <= amount)
 	{
-		fork_left = philo_forks_get(forks, (i - 1));
+		fork_left = philo_forks_get(forks, (i - 2));
 		new = philo_lstnew(f, fork_left, table, i);
 		if (!new)
 		{

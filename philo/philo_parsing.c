@@ -6,7 +6,7 @@
 /*   By: csouza-f <caio@42sp.org.br>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/28 18:32:55 by csouza-f          #+#    #+#             */
-/*   Updated: 2022/01/18 22:37:40 by csouza-f         ###   ########.fr       */
+/*   Updated: 2022/01/18 22:50:35 by csouza-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,16 @@ struct s_args	*philo_parsing(int argc, char **argv)
 		free(args);
 		return (NULL);
 	}
+	args->nbr_of_times_each_philo_must_eat = 0;
+	if (argv[4])
+	{
+		args->nbr_of_times_each_philo_must_eat = ft_simple_atoi(argv[4]);
+		if (!args->nbr_of_times_each_philo_must_eat)
+		{
+			free(args);
+			return (NULL);
+		}
+	}
 	args->time_to_die = ft_simple_atoi(argv[1]);
 	args->time_to_eat = ft_simple_atoi(argv[2]);
 	if (!args->time_to_eat)
@@ -98,8 +108,5 @@ struct s_args	*philo_parsing(int argc, char **argv)
 	args->time_to_sleep = ft_simple_atoi(argv[3]);
 	if (!args->time_to_sleep)
 		args->time_to_sleep = REPLACE_DELAY_MILISEC;
-	args->nbr_of_times_each_philo_must_eat = 0;
-	if (argv[4])
-		args->nbr_of_times_each_philo_must_eat = ft_simple_atoi(argv[4]);
 	return (args);
 }
