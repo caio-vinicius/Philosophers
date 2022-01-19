@@ -6,11 +6,37 @@
 /*   By: csouza-f <caio@42sp.org.br>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 22:45:00 by csouza-f          #+#    #+#             */
-/*   Updated: 2022/01/17 23:53:33 by csouza-f         ###   ########.fr       */
+/*   Updated: 2022/01/18 22:33:46 by csouza-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+void	usage(void)
+{
+	printf("\nUsage: philo NUMBER_OF_PHILOSOPHERS"
+		" TIME_TO_DIE TIME_TO_EAT TIME_TO_SLEEP"
+		" [ NUMBER_OF_TIMES_EACH_PHILOSOPHER_MUST_EAT ]\n\n"
+		"I’ve never thought philosophy would be so deadly.\n\n"
+		"Options:\n\n"
+		" NUMBER_OF_PHILOSOPHERS				"
+		"Is the number of philosophers and also the number of forks.\n"
+		" TIME_TO_DIE					"
+		"In milliseconds, if a philosopher doesn’t start eating ’time_to_die’"
+		" milliseconds after starting their last meal or the beginning of the"
+		" simulation, it dies.\n"
+		" TIME_TO_EAT					"
+		"Is in milliseconds and is the time it takes for a philosopher to eat."
+		" During that time they will need to keep the two forks.\n"
+		" TIME_TO_SLEEP					"
+		"Is in milliseconds and is the time the philosopher"
+		" will spend sleeping.\n"
+		" NUMBER_OF_TIMES_EACH_PHILOSOPHER_MUST_EAT	"
+		"Argument is optional, if all philosophers eat at least"
+		" ’number_of_times_each_philosopher_must_eat’ the simulation will stop."
+		" If not specified, the simulation will stop only at the death"
+		" of a philosopher.\n");
+}
 
 char	*ft_simple_itoa(unsigned int number)
 {
